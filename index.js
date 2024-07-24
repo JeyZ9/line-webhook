@@ -207,7 +207,7 @@ app.post("/webhook", (req, res) => {
     }
 
     const calRectangle = (agent) => {
-        let width = agent.parameters.widht;
+        let width = agent.parameters.width;
         let length = agent.parameters.length;
         let result = width * length;
         agent.add(result);

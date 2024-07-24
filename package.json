@@ -1,0 +1,26 @@
+{
+  "name": "line-webhook",
+  "version": "1.0.0",
+  "description": "this is a webhook for line chat bot.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "author": "JeyZ",
+  "license": "ISC",
+  "engines": {
+    "node": "10"
+  },
+  "keywords": [
+    "line",
+    "chatbot",
+    "webhook"
+  ],
+  "dependencies": {
+    "express": "^4.19.2",
+    "actions-on-google": "^2.2.0",
+    "dialogflow-fulfillment": "^0.5.0"
+  }
+}

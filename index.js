@@ -203,14 +203,23 @@ app.post("/webhook", (req, res) => {
 
         let payload = new Payload("LINE", flexMessage, { sendAsMessage: true });
         agent.add(result);
-        // agent.add(payloade);
+        // agent.add(payload);
     }
 
     const calRectangle = (agent) => {
         let width = agent.parameters.width;
-        let length = agent.parameters.length;
-        let result = width * length;
-        agent.add(result);
+        let lengths = agent.parameters.lengths;
+        let result = width * lengths;
+        // if(width != null && length != null){
+        //     agent.add("hello success!");
+        // }else{
+        //     agent.add("Error!")
+        // }
+        if(result != null){
+            agent.add(`กว้าง ${width} ซม. x สูง ${lengths} ซม. = ${result} ซม.`)
+        }else{
+            agent.add("Oh shit!, sorry")
+        }
     }
 
     let intentMap = new Map();
@@ -219,7 +228,7 @@ app.post("/webhook", (req, res) => {
     
     intentMap.set('BMI - custom - yes', bodyMassIndex);
 
-    intentMap.set('areaTwo - custom - custom - yes', calRectangle);
+    intentMap.set('area - rectangle - yes', calRectangle);
   
     agent.handleRequest(intentMap);
 });

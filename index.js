@@ -216,10 +216,26 @@ app.post("/webhook", (req, res) => {
         //     agent.add("Error!")
         // }
         if(result != null){
-            agent.add(`กว้าง ${width} ซม. x สูง ${lengths} ซม. = ${result} ซม.`)
+            agent.add(`กว้าง ${width} ซม. x สูง ${lengths} ซม. = ${result} ซม.`);
         }else{
-            agent.add("Oh shit!, sorry")
+            agent.add("Oh shit!, sorry");
         }
+    }
+
+    const calCircle = (agent) => {
+        let r = agent.parameters.r;
+        let pi = Math.PI;
+        let result = pi * Math.pow(r, 2);
+
+        agent.add(`พื้นที่วงกลมเท่ากับ ${result.toFixed(2)} ซม.`);
+    }
+
+    const calTiangle = (agent) => {
+        let base = agent.parameters.base;
+        let height = agent.parameters.height;
+        let result = 0.5 * base * height;
+
+        agent.add(`พื้นที่สามเหลี่ยมเท่ากับ ${result}`);
     }
 
     let intentMap = new Map();
@@ -229,6 +245,8 @@ app.post("/webhook", (req, res) => {
     intentMap.set('BMI - custom - yes', bodyMassIndex);
 
     intentMap.set('area - rectangle - yes', calRectangle);
+    intentMap.set('area - circle - q - yes', calCircle);
+    intentMap.set('area - tiangle - q - yes', calTiangle);
   
     agent.handleRequest(intentMap);
 });

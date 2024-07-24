@@ -203,7 +203,7 @@ app.post("/webhook", (req, res) => {
 
         let payload = new Payload("LINE", flexMessage, { sendAsMessage: true });
         agent.add(result);
-        // agent.add(payload);
+        // agent.add(payloade);
     }
 
     const calRectangle = (agent) => {

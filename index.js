@@ -206,11 +206,20 @@ app.post("/webhook", (req, res) => {
         agent.add(payload);
     }
 
+    const calRectangle = (agent) => {
+        let width = agent.parameters.widht;
+        let length = agent.parameters.length;
+        let result = width * length;
+        agent.add(result);
+    }
+
     let intentMap = new Map();
     intentMap.set('Default Welcome Intent', welcome);
     intentMap.set('Default Fallback Intent', fallback);
     
     intentMap.set('BMI - custom - yes', bodyMassIndex);
+
+    intentMap.set('areaTwo - custom - custom - yes', calRectangle);
   
     agent.handleRequest(intentMap);
 });

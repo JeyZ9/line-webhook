@@ -20,8 +20,8 @@ app.post("/webhook", (req, res) => {
         response : res
     });
 
-    console.log('Dialogflow Request headers: ' + JSON.stringify(req.headers));
-    console.log('Dialogflow Request body: ' + JSON.stringify(req.body));
+    // console.log('Dialogflow Request headers: ' + JSON.stringify(req.headers));
+    // console.log('Dialogflow Request body: ' + JSON.stringify(req.body));
 
     function welcome(agent) {
         agent.add(`Welcome to my agent!`);
@@ -36,190 +36,194 @@ app.post("/webhook", (req, res) => {
         let weight = agent.parameters.weight;
         let height = agent.parameters.height / 100;
         let bmi = (weight / (height * height)).toFixed(2);
-        let result = 'ขออภัย หนูไม่เข้าใจ';
-        
-        if (bmi < 18.5){
-          result = 'คุณผอมไป กินข้าวบ้างนะ';
-        } else if (bmi >= 18.5 && bmi<= 22.9){
-          result = 'คุณหุ่นดีจุงเบย';
-        } else if (bmi >= 23 && bmi<= 24.9){
-          result = 'คุณเริ่มจะท้วมแล้วนะ';
-        } else if (bmi >= 25.8& bmi<= 29.9){
-          result = 'คุณอ้วนละ ออกกำลังกายหน่อยนะ';
-        } else if (bmi > 30){
-          result = 'คุณอ้วนเกินไปละ หาหมอเหอะ';
+    
+        let result = "ขออภัย หนูไม่เข้าใจ";
+    
+        if (bmi < 18.5) {
+          result = "คุณผอมไป กินข้าวบ้างนะ";
+        } else if (bmi >= 18.5 && bmi <= 22.9) {
+          result = "คุณหุ่นดีจุงเบย";
+        } else if (bmi >= 23 && bmi <= 24.9) {
+          result = "คุณเริ่มจะท้วมแล้วนะ";
+        } else if ((bmi >= 25) && (bmi <= 29.9)) {
+          result = "คุณอ้วนละ ออกกำลังกายหน่อยนะ";
+        } else if (bmi > 30) {
+          result = "คุณอ้วนเกินไปละ หาหมอเหอะ";
         }
-
         const flexMessage = {
-            "type": "flex",
-            "altText": "Flex Message",
-            "contents": {
-                "type": "bubble",
-                "hero": {
-                    "type": "image",
-                    "url": "https://developers-resource.landpress.line.me/fx/img/01_1_cafe.png",
-                    "size": "full",
-                    "aspectRatio": "20:13",
-                    "aspectMode": "cover",
-                    "action": {
-                        "type": "uri",
-                        "uri": "https://line.me/"
-                    }
+          type: "flex",
+          altText: "Flex Message",
+          contents: {
+            type: "bubble",
+            header: {
+              type: "box",
+              layout: "vertical",
+              contents: [
+                {
+                  type: "text",
+                  text: "BMI Calculation Result",
+                  weight: "bold",
+                  size: "lg",
+                  align: "center",
                 },
-                "body": {
-                    "type": "box",
-                    "layout": "vertical",
-                    "contents": [
-                        {
-                            "type": "text",
-                            "text": "Brown Cafe",
-                            "weight": "bold",
-                            "size": "xl"
-                        },
-                        {
-                            "type": "box",
-                            "layout": "baseline",
-                            "margin": "md",
-                            "contents": [
-                                {
-                                    "type": "icon",
-                                    "size": "sm",
-                                    "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png"
-                                },
-                                {
-                                    "type": "icon",
-                                    "size": "sm",
-                                    "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png"
-                                },
-                                {
-                                    "type": "icon",
-                                    "size": "sm",
-                                    "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png"
-                                },
-                                {
-                                    "type": "icon",
-                                    "size": "sm",
-                                    "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png"
-                                },
-                                {
-                                    "type": "icon",
-                                    "size": "sm",
-                                    "url": "https://developers-resource.landpress.line.me/fx/img/review_gray_star_28.png"
-                                },
-                                {
-                                    "type": "text",
-                                    "text": "4.0",
-                                    "size": "sm",
-                                    "color": "#999999",
-                                    "margin": "md"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "box",
-                            "layout": "vertical",
-                            "margin": "lg",
-                            "spacing": "sm",
-                            "contents": [
-                                {
-                                    "type": "box",
-                                    "layout": "baseline",
-                                    "spacing": "sm",
-                                    "contents": [
-                                        {
-                                            "type": "text",
-                                            "text": result,
-                                            "color": "#aaaaaa",
-                                            "size": "sm"
-                                        },
-                                        {
-                                            "type": "text",
-                                            "text": "Flex Tower, 7-7-4 Midori-ku, Tokyo",
-                                            "wrap": true,
-                                            "color": "#666666",
-                                            "size": "sm"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "box",
-                                    "layout": "baseline",
-                                    "spacing": "sm",
-                                    "contents": [
-                                        {
-                                            "type": "text",
-                                            "text": "Time",
-                                            "color": "#aaaaaa",
-                                            "size": "sm"
-                                        },
-                                        {
-                                            "type": "text",
-                                            "text": "10:00 - 23:00",
-                                            "wrap": true,
-                                            "color": "#666666",
-                                            "size": "sm"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
+              ],
+            },
+            hero: {
+              type: "image",
+              url: "https://lirp.cdn-website.com/69c0b277/dms3rep/multi/opt/BMI+levels-1920w.jpg",
+              size: "full",
+              aspectRatio: "20:13",
+              aspectMode: "cover",
+            },
+            body: {
+              type: "box",
+              layout: "vertical",
+              contents: [
+                {
+                  type: "text",
+                  text: "Your BMI Result",
+                  weight: "bold",
+                  size: "md",
+                  margin: "md",
                 },
-                "footer": {
-                    "type": "box",
-                    "layout": "vertical",
-                    "spacing": "sm",
-                    "contents": [
-                        {
-                            "type": "button",
-                            "style": "link",
-                            "height": "sm",
-                            "action": {
-                                "type": "uri",
-                                "label": "CALL",
-                                "uri": "https://line.me/"
-                            }
-                        },
-                        {
-                            "type": "button",
-                            "style": "link",
-                            "height": "sm",
-                            "action": {
-                                "type": "uri",
-                                "label": "WEBSITE",
-                                "uri": "https://line.me/"
-                            }
-                        },
-                        {
-                            "type": "box",
-                            "layout": "vertical",
-                            "contents": [],
-                            "margin": "sm"
-                        }
-                    ]
-                }
-            }
+                {
+                  type: "text",
+                  text: "Height: " + height * 100 + " cm",
+                  size: "sm",
+                  margin: "sm",
+                },
+                {
+                  type: "text",
+                  text: "Weight: " + weight + " kg",
+                  size: "sm",
+                  margin: "sm",
+                },
+                {
+                  type: "separator",
+                  margin: "lg",
+                },
+                {
+                  type: "text",
+                  text: "BMI: " + bmi,
+                  weight: "bold",
+                  size: "xl",
+                  align: "center",
+                  margin: "lg",
+                  color: "#00b900",
+                },
+                {
+                  type: "text",
+                  text: result,
+                  align: "center",
+                  size: "sm",
+                  margin: "md",
+                },
+              ],
+            },
+            footer: {
+              type: "box",
+              layout: "vertical",
+              contents: [
+                {
+                  type: "button",
+                  action: {
+                    type: "uri",
+                    label: "รายละเอียดเพิ่มเติม",
+                    uri: "https://samitivejchinatown.com/th/article/health/BMI-calculator",
+                  },
+                  style: "primary",
+                  color: "#1DB446",
+                },
+              ],
+            },
+          },
         };
-
+    
         let payload = new Payload("LINE", flexMessage, { sendAsMessage: true });
-        agent.add(result);
-        // agent.add(payload);
+        // if(!payload){
+            agent.add(payload);
+        // }else{
+            // agent.add("not output")
+        // }
     }
 
     const calRectangle = (agent) => {
         let width = agent.parameters.width;
         let lengths = agent.parameters.lengths;
         let result = width * lengths;
-        // if(width != null && length != null){
-        //     agent.add("hello success!");
+
+        let flexMessage = 
+        {
+            type: "flex",
+            altText: "Flex Message",
+            contents: {
+            "type": "bubble",
+            "hero": {
+              "type": "image",
+              "url": "https://bucket.ex10.tech/images/83f95d06-4ab0-11ef-891c-0242ac120003/originalContentUrl.png",
+              "size": "full",
+              "aspectRatio": "20:13",
+              "aspectMode": "cover",
+              "action": {
+                "type": "uri",
+                "uri": "http://www.debsirinsp.ac.th/debsirinsp/doc/Cature1%20Flow%20Chart/excample.pdf"
+              }
+            },
+            "body": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": `${result} cm.`,
+                  "weight": "bold",
+                  "size": "xl"
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "margin": "md",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": `กว้าง ${width} ซม. x ยาว ${lengths} ซม. = ${result} ซม.`,
+                      "size": "sm",
+                      "color": "#999999",
+                      "margin": "md"
+                    }
+                  ]
+                }
+              ]
+            },
+            "footer": {
+              "type": "box",
+              "layout": "vertical",
+              "spacing": "sm",
+              "contents": [
+                {
+                  "type": "button",
+                  "style": "link",
+                  "height": "sm",
+                  "action": {
+                    "type": "uri",
+                    "label": "description",
+                    "uri": "http://www.debsirinsp.ac.th/debsirinsp/doc/Cature1%20Flow%20Chart/excample.pdf"
+                  }
+                }
+              ]
+            }
+          }
+        };
+
+        let payload = new Payload("LINE", flexMessage, { sendAsMessage : true});
+        agent.add(payload);
+        
+
+        // if(result != null){
+        //     agent.add(`กว้าง ${width} ซม. x สูง ${lengths} ซม. = ${result} ซม.`);
         // }else{
-        //     agent.add("Error!")
+        //     agent.add("Oh shit!, sorry");
         // }
-        if(result != null){
-            agent.add(`กว้าง ${width} ซม. x สูง ${lengths} ซม. = ${result} ซม.`);
-        }else{
-            agent.add("Oh shit!, sorry");
-        }
     }
 
     const calCircle = (agent) => {
@@ -227,13 +231,145 @@ app.post("/webhook", (req, res) => {
         let pi = Math.PI;
         let result = pi * Math.pow(r, 2);
 
-        agent.add(`พื้นที่วงกลมเท่ากับ ${result.toFixed(2)} ซม.`);
+        let flexMessage = 
+        {
+            type: "flex",
+            altText: "Flex Message",
+            contents: {
+            "type": "bubble",
+            "hero": {
+              "type": "image",
+              "url": "https://bucket.ex10.tech/images/829065fd-4ab1-11ef-891c-0242ac120003/originalContentUrl.png",
+              "size": "full",
+              "aspectRatio": "20:13",
+              "aspectMode": "cover",
+              "action": {
+                "type": "uri",
+                "uri": "http://www.debsirinsp.ac.th/debsirinsp/doc/Cature1%20Flow%20Chart/excample.pdf"
+              }
+            },
+            "body": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": `${result.toFixed(2)} cm.`,
+                  "weight": "bold",
+                  "size": "xl"
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "margin": "md",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": `Pi ${pi.toFixed(2)} x r ${r} x ${r} = ${result.toFixed(2)} cm`,
+                      "size": "sm",
+                      "color": "#999999",
+                      "margin": "md"
+                    }
+                  ]
+                }
+              ]
+            },
+            "footer": {
+              "type": "box",
+              "layout": "vertical",
+              "spacing": "sm",
+              "contents": [
+                {
+                  "type": "button",
+                  "style": "link",
+                  "height": "sm",
+                  "action": {
+                    "type": "uri",
+                    "label": "description",
+                    "uri": "http://www.debsirinsp.ac.th/debsirinsp/doc/Cature1%20Flow%20Chart/excample.pdf"
+                  }
+                }
+              ]
+            }
+          }
+        };
+
+        let payload = new Payload("LINE", flexMessage, { sendAsMessage : true});
+        agent.add(payload);
+
+        // agent.add(`พื้นที่วงกลมเท่ากับ ${result.toFixed(2)} ซม.`);
     }
 
     const calTiangle = (agent) => {
         let base = agent.parameters.base;
         let height = agent.parameters.height;
         let result = 0.5 * base * height;
+
+        let flexMessage = 
+        {
+            type: "flex",
+            altText: "Flex Message",
+            contents: {
+            "type": "bubble",
+            "hero": {
+              "type": "image",
+              "url": "https://bucket.ex10.tech/images/909126e3-4ab1-11ef-891c-0242ac120003/originalContentUrl.png",
+              "size": "full",
+              "aspectRatio": "20:13",
+              "aspectMode": "cover",
+              "action": {
+                "type": "uri",
+                "uri": "http://www.debsirinsp.ac.th/debsirinsp/doc/Cature1%20Flow%20Chart/excample.pdf"
+              }
+            },
+            "body": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": `${result.toFixed(2)} cm.`,
+                  "weight": "bold",
+                  "size": "xl"
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "margin": "md",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": `0.5 x ฐาน ${base} ซม. x  สูง ${height} ซม. = ${result.toFixed(2)} ซม.`,
+                      "size": "sm",
+                      "color": "#999999",
+                      "margin": "md"
+                    }
+                  ]
+                }
+              ]
+            },
+            "footer": {
+              "type": "box",
+              "layout": "vertical",
+              "spacing": "sm",
+              "contents": [
+                {
+                  "type": "button",
+                  "style": "link",
+                  "height": "sm",
+                  "action": {
+                    "type": "uri",
+                    "label": "description",
+                    "uri": "http://www.debsirinsp.ac.th/debsirinsp/doc/Cature1%20Flow%20Chart/excample.pdf"
+                  }
+                }
+              ]
+            }
+          }
+        };
+
+        let payload = new Payload("LINE", flexMessage, { sendAsMessage : true});
+        agent.add(payload);
 
         agent.add(`พื้นที่สามเหลี่ยมเท่ากับ ${result}`);
     }

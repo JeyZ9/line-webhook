@@ -371,7 +371,7 @@ app.post("/webhook", (req, res) => {
         let payload = new Payload("LINE", flexMessage, { sendAsMessage : true});
         agent.add(payload);
 
-        agent.add(`พื้นที่สามเหลี่ยมเท่ากับ ${result}`);
+        // agent.add(`พื้นที่สามเหลี่ยมเท่ากับ ${result}`);
     }
 
     let intentMap = new Map();

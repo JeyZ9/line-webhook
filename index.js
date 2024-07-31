@@ -175,7 +175,7 @@ app.post("/webhook", (req, res) => {
               "contents": [
                 {
                   "type": "text",
-                  "text": `${result} cm.`,
+                  "text": `${result} ตร.ซม.`,
                   "weight": "bold",
                   "size": "xl"
                 },
@@ -186,7 +186,7 @@ app.post("/webhook", (req, res) => {
                   "contents": [
                     {
                       "type": "text",
-                      "text": `กว้าง ${width} ซม. x ยาว ${lengths} ซม. = ${result} ซม.`,
+                      "text": `กว้าง ${width} ซม. x ยาว ${lengths} ซม. = ${result} ตร.ซม.`,
                       "size": "sm",
                       "color": "#999999",
                       "margin": "md"
@@ -254,7 +254,7 @@ app.post("/webhook", (req, res) => {
               "contents": [
                 {
                   "type": "text",
-                  "text": `${result.toFixed(2)} cm.`,
+                  "text": `${result.toFixed(2)} ตร.ซม.`,
                   "weight": "bold",
                   "size": "xl"
                 },
@@ -265,7 +265,7 @@ app.post("/webhook", (req, res) => {
                   "contents": [
                     {
                       "type": "text",
-                      "text": `Pi ${pi.toFixed(2)} x r ${r} x ${r} = ${result.toFixed(2)} cm`,
+                      "text": `Pi ${pi.toFixed(2)} x r ${r} x ${r} = ${result.toFixed(2)} ตร.ซม.`,
                       "size": "sm",
                       "color": "#999999",
                       "margin": "md"
@@ -328,7 +328,7 @@ app.post("/webhook", (req, res) => {
               "contents": [
                 {
                   "type": "text",
-                  "text": `${result.toFixed(2)} cm.`,
+                  "text": `${result.toFixed(2)} ตร.ซม.`,
                   "weight": "bold",
                   "size": "xl"
                 },
@@ -339,7 +339,7 @@ app.post("/webhook", (req, res) => {
                   "contents": [
                     {
                       "type": "text",
-                      "text": `0.5 x ฐาน ${base} ซม. x  สูง ${height} ซม. = ${result.toFixed(2)} ซม.`,
+                      "text": `0.5 x ฐาน ${base} ซม. x  สูง ${height} ซม. = ${result.toFixed(2)} ตร.ซม.`,
                       "size": "sm",
                       "color": "#999999",
                       "margin": "md"
@@ -381,7 +381,7 @@ app.post("/webhook", (req, res) => {
     intentMap.set('BMI - custom - yes', bodyMassIndex);
 
     intentMap.set('area - rectangle - yes', calRectangle);
-    intentMap.set('area - circle - q - yes', calCircle);
+    intentMap.set('area - cricle - custom - yes', calCircle);
     intentMap.set('area - tiangle - q - yes', calTiangle);
   
     agent.handleRequest(intentMap);
